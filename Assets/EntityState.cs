@@ -3,25 +3,28 @@ using UnityEngine;
 
 public class EntityState
 {
-    protected StateMachine statemachine;
+    protected StateMachine stateMachine;
+    protected string stateName;
 
-    public EntityState(StateMachine stateMachie)
+
+    public EntityState(StateMachine stateMachine, string stateName)
     {
-        this.statemachine = statemachine;
+        this.stateMachine = stateMachine;
+        this.stateName = stateName; //construncter
     }
 
     public virtual void Enter()
     {
-        
+        Debug.Log("I enter" + stateName);
     }
 
     public virtual void Update()
     {
-        
+        Debug.Log("I run update of" + stateName);
     }
 
     public virtual void Exit()
     {
-
+        Debug.Log("I exit" + stateName);
     }
 }

@@ -1,16 +1,20 @@
 using UnityEngine;
 
-public class NewMonoBehaviourScript : MonoBehaviour
+public class StateMachine
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public EntityState currentState { get; private set; } //anyone cane see it but nobody can change it
+
+    public void Intialize(EntityState startState)
     {
-        
+        currentState = startState;
+        currentState.Enter();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ChangeState(EntityState newState)
     {
-        
+        currentState.Exit();
+        currentState = newState;
+        currentState.Enter();
     }
 }
+    
