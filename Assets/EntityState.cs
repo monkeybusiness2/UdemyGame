@@ -1,16 +1,18 @@
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class EntityState
+public abstract class EntityState //should be parent class a base class
 {
     protected StateMachine stateMachine;
     protected string stateName;
+    protected Player player;
 
 
-    public EntityState(StateMachine stateMachine, string stateName)
+    public EntityState(Player player, StateMachine stateMachine, string stateName)
     {
         this.stateMachine = stateMachine;
         this.stateName = stateName; //construncter
+        this.player = player;
     }
 
     public virtual void Enter()
