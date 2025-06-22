@@ -17,16 +17,16 @@ public abstract class EntityState //should be parent class a base class
 
     public virtual void Enter()
     {
-        Debug.Log("I enter" + stateName);
+      //  Debug.Log("I enter" + stateName);
     }
 
     public virtual void Update()
     {
-        Debug.Log("I run update of" + stateName);
+      //  Debug.Log("I run update of" + stateName);
     }
 
     public virtual void Exit()
     {
-        Debug.Log("I exit" + stateName);
+      //  Debug.Log("I exit" + stateName);
     }
 }
