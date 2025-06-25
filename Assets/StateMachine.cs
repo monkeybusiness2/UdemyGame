@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class StateMachine
@@ -15,6 +16,16 @@ public class StateMachine
         currentState.Exit();
         currentState = newState;
         currentState.Enter();
+    }
+
+    public void UpdateActiveState()
+    {
+        currentState.Update();
+    }
+
+    internal void Initialize(PlayerIdleState idleState)
+    {
+        throw new NotImplementedException();
     }
 }
     

@@ -1,12 +1,18 @@
+using System.Numerics;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Vector2 = UnityEngine.Vector2;
 
 public class Player : MonoBehaviour
 {
     private PlayerInputSet input;
     private StateMachine stateMachine;
-    public  PlayerIdleState idleState { get; private set; }
+
+    public PlayerIdleState idleState { get; private set; }
     public PlayerMoveState moveState { get; private set; }
+
+    public Vector2 moveInput { get; private set; }
 
     private void Awake()
     {
@@ -21,22 +27,23 @@ public class Player : MonoBehaviour
     {
         input.Enable();
 
-        input.Player.Movement.performed += ctx => Debug.Log(ctx.ReadValue<Vector2>());
-        
+
+        input.Player.Movement.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
+        input.Player.Movement.canceled += ctx => moveInput = Vector2.zero;
     }
 
     private void OnDisable()
     {
         input.Disable();
     }
+
     private void Start()
     {
-        stateMachine.Intialize(idleState);
+         stateMachine.Initialize(idleState);
     }
 
     private void Update()
     {
-        stateMachine.currentState.Update();
+        stateMachine.UpdateActiveState();
     }
-
 }
