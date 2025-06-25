@@ -1,16 +1,12 @@
-using System.Numerics;
-using JetBrains.Annotations;
 using UnityEngine;
-using UnityEngine.UIElements;
-using Vector2 = UnityEngine.Vector2;
 
 public class Player : MonoBehaviour
 {
     private PlayerInputSet input;
     private StateMachine stateMachine;
 
-    public PlayerIdleState idleState { get; private set; }
-    public PlayerMoveState moveState { get; private set; }
+    public Player_IdleState idleState { get; private set; }
+    public Player_MoveState moveState { get; private set; }
 
     public Vector2 moveInput { get; private set; }
 
@@ -19,8 +15,9 @@ public class Player : MonoBehaviour
         stateMachine = new StateMachine();
         input = new PlayerInputSet();
 
-        idleState = new PlayerIdleState(this, stateMachine, "idle");
-        moveState = new PlayerMoveState(this, stateMachine, "move");
+        idleState = new Player_IdleState(this, stateMachine, "idle");
+        moveState = new Player_MoveState(this, stateMachine, "move");
+
     }
 
     private void OnEnable()

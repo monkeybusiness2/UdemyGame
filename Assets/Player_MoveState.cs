@@ -1,13 +1,10 @@
 using UnityEngine;
 
-public class PlayerMoveState : EntityState
+public class Player_MoveState : EntityState
 {
-
-    public PlayerMoveState(Player player, StateMachine stateMachine, string stateName) : base(player, stateMachine, stateName)
+    public Player_MoveState(Player player, StateMachine stateMachine, string stateName) : base(player, stateMachine, stateName)
     {
-
     }
-
 
     public override void Update()
     {
@@ -15,9 +12,5 @@ public class PlayerMoveState : EntityState
 
         if (player.moveInput.x == 0)
             stateMachine.ChangeState(player.idleState);
-
-
-
     }
-
 }
