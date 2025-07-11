@@ -5,12 +5,15 @@ public class Player : MonoBehaviour
 
     public Animator anim { get; private set; }
     private PlayerInputSet input;
+    public Rigidbody2D rb { get; private set; }
     private StateMachine stateMachine;
 
     public Player_IdleState idleState { get; private set; }
     public Player_MoveState moveState { get; private set; }
 
     public Vector2 moveInput { get; private set; }
+    [Header("Movement details")]
+    public float movepeed
 
     private void Awake()
     {
@@ -21,6 +24,7 @@ public class Player : MonoBehaviour
 
         idleState = new Player_IdleState(this, stateMachine, "idle");
         moveState = new Player_MoveState(this, stateMachine, "move");
+        rb = GetComponent<Rigidbody2D>();
 
     }
 
@@ -40,11 +44,16 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-         stateMachine.Initialize(idleState);
+        stateMachine.Initialize(idleState);
     }
 
     private void Update()
     {
         stateMachine.UpdateActiveState();
+    }
+
+    public void SetVelocity(float xVelocity, float yVelocity)
+    {
+        rb.linearVelocity = new Vector2(xVelocity, yVelocity);
     }
 }
