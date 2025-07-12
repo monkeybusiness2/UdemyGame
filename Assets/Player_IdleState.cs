@@ -12,5 +12,10 @@ public class Player_IdleState : EntityState
 
         if (player.moveInput.x != 0)
             stateMachine.ChangeState(player.moveState);
+
+        if (player.input.Player.Jump.WasPressedThisFrame())
+        {
+            Debug.Log("Jump");
+        }
     }
 }

@@ -4,7 +4,7 @@ public class Player : MonoBehaviour
 {
 
     public Animator anim { get; private set; }
-    private PlayerInputSet input;
+    public PlayerInputSet input { get; private set;}
     public Rigidbody2D rb { get; private set; }
     private StateMachine stateMachine;
 
@@ -13,18 +13,21 @@ public class Player : MonoBehaviour
 
     public Vector2 moveInput { get; private set; }
     [Header("Movement details")]
-    public float movepeed
+    public float moveSpeed;
+
+    private bool facingright = true;
 
     private void Awake()
     {
         anim = GetComponentInChildren<Animator>();
+        rb = GetComponent<Rigidbody2D>();
 
         stateMachine = new StateMachine();
         input = new PlayerInputSet();
 
         idleState = new Player_IdleState(this, stateMachine, "idle");
         moveState = new Player_MoveState(this, stateMachine, "move");
-        rb = GetComponent<Rigidbody2D>();
+
 
     }
 
@@ -55,5 +58,20 @@ public class Player : MonoBehaviour
     public void SetVelocity(float xVelocity, float yVelocity)
     {
         rb.linearVelocity = new Vector2(xVelocity, yVelocity);
+        HandleFlip(xVelocity);
     }
+
+    private void HandleFlip(float xVelocity)
+    {
+        if (xVelocity > 0 && facingright == false)
+            Flip();
+        else if (xVelocity < 0 && facingright)
+            Flip();
+    }
+    private void Flip()
+    {
+        transform.Rotate(0, 180, 0);
+        facingright = !facingright;
+    }
+
 }

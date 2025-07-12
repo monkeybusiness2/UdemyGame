@@ -14,17 +14,17 @@ public abstract class EntityState
         this.stateMachine = stateMachine;
         this.animBoolName = animBoolName;
         anim = player.anim;
-        rb = player.rb
+        rb = player.rb;
     }
 
     public virtual void Enter()
     {
-        anim.SetBool(animBoolName, true); //
+        anim.SetBool(animBoolName, true); 
     }
 
     public virtual void Update()
     {
-        Debug.Log("I run update of " + animBoolName);
+       
     }
 
     public virtual void Exit()
