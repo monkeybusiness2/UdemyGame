@@ -1,16 +1,27 @@
 using UnityEngine;
 
-public class Player_JumpState : MonoBehaviour
+public class Player_JumpState : EntityState
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public Player_JumpState(Player player, StateMachine stateMachine, string animBoolName) : base(player, stateMachine, animBoolName)
     {
-        
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void Enter()
     {
-        
+        base.Enter();
+        player.SetVelocity(rb.linearVelocity.x, player.jumpForce);
     }
+
+    public override void Update()
+    {
+        base.Update();
+        if (rb.linearVelocity.y < 0)
+            stateMachine.ChangeState(player.fallState);
+       
+        //if Y velocity goes down, charqacter is falling. transfer to fallstate
+
+    }
+
+
 }
+
